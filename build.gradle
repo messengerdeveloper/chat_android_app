@@ -1,0 +1,56 @@
+import com.android.build.gradle.LibraryPlugin
+import org.gradle.internal.resource.ResourceNotFoundException
+
+allprojects {
+    if (it != rootProject && !"app".equals(it.name)) {
+        it.afterEvaluate {
+            if (it.plugins.hasPlugin(LibraryPlugin)) {
+                try {
+                    it.apply from: "$rootDir/deploy.gradle"
+                } catch (ResourceNotFoundException ignored) {
+                    ignored.printStackTrace()
+                }
+            }
+        }
+    }
+
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://dl.bintray.com/hani-momanii/maven" }
+
+        if (configurations.findByName("testCompile")) {
+            dependencies {
+                // testing dependencies go here...
+                testCompile "junit:junit:4.12"
+            }
+        }
+
+        flatDir {
+            dirs '../libs'
+        }
+    }
+}
+
+buildscript {
+    ext {
+        compileSdkVersion = 24
+        buildToolsVersion = '24.0.2'
+        targetSdkVersion = compileSdkVersion
+        applicationId = 'com.globalmsgcommunications.hichatter'
+    }
+
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
+task clean(type: Delete) {
+    delete allprojects.buildDir
+}

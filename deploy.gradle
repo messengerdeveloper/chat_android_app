@@ -1,0 +1,12 @@
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://localhost/$rootDir.absolutePath/m2repository/")
+            pom.version = "${project.android.defaultConfig.versionName}"
+            pom.groupId = 'com.globalmsgcommunications.hichatter'
+            pom.artifactId = project.name
+        }
+    }
+}

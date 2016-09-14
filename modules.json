@@ -1,0 +1,24 @@
+{
+  "modules": [
+    {
+      "name": "app",
+      "path": "git@git_bey_client:android/dev/modules/app.git"
+    },
+    {
+      "name": "util",
+      "path": "git@git_bey_client:android/dev/modules/util.git"
+    },
+    {
+      "name": "registration",
+      "path": "git@git_bey_client:android/dev/modules/registration.git"
+    },
+    {
+      "name": "chat",
+      "path": "git@git_bey_client:android/dev/modules/chat.git"
+    },
+    {
+      "name": "chatcore",
+      "path": "git@git_bey_client:android/dev/modules/chatcore.git"
+    }
+  ]
+}
